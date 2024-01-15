@@ -1,7 +1,7 @@
 import express from "express";
 import { createServer } from "node:http";
 import dotenv from "dotenv";
-import { Server } from "socket.io";
+
 import { HfInference } from "@huggingface/inference";
 
 dotenv.config();
