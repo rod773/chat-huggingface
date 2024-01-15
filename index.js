@@ -6,6 +6,8 @@ import { HfInference } from "@huggingface/inference";
 
 dotenv.config();
 
+const inference = new HfInference(process.env.HF_TOKEN); // your user token
+
 const PORT = process.env.PORT || 8000;
 
 const app = express();
@@ -16,18 +18,25 @@ const server = createServer(app);
 
 const io = new Server(server);
 
-app.get("/test", async (req, res) => {
-  const inference = new HfInference(process.env.TOKEN); // your user token
+const question = "The answer to the universe is";
 
-  const gpt2 = inference.endpoint(
-    "https://api-inference.huggingface.co/models/OpenAssistant/oasst-sft-4-pythia-12b-epoch-3.5"
-  );
+const gpt2 = inference.endpoint(
+  "https://api-inference.huggingface.co/models/OpenAssistant/oasst-sft-4-pythia-12b-epoch-3.5"
+);
+
+app.get("/test", async (req, res) => {
+  res.send({
+    message: "chat-hugingface",
+  });
+});
+
+app.post("/test", async (req, res) => {
   const { generated_text } = await gpt2.textGeneration({
-    inputs: "The answer to the universe is",
+    inputs: question,
   });
 
   res.send({
-    input: "The answer to the universe is",
+    input: question,
     generated_text: generated_text,
   });
 });
