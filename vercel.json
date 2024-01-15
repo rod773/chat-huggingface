@@ -1,4 +1,7 @@
 {
-  "source": "index.js",
-  "path": "/api"
+  "builds": [
+    {
+      "src": "index.js"
+    }
+  ]
 }
