@@ -44,3 +44,5 @@ app.post("/api", async (req, res) => {
 server.listen(PORT, () => {
   console.log(`http://localhost:${PORT}/api`);
 });
+
+module.exports = server;
