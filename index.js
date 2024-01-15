@@ -16,8 +16,6 @@ app.use(express.json());
 
 const server = createServer(app);
 
-const io = new Server(server);
-
 const gpt2 = inference.endpoint(
   "https://api-inference.huggingface.co/models/OpenAssistant/oasst-sft-4-pythia-12b-epoch-3.5"
 );
@@ -44,5 +42,3 @@ app.post("/api", async (req, res) => {
 server.listen(PORT, () => {
   console.log(`http://localhost:${PORT}/api`);
 });
-
-module.exports = server;
