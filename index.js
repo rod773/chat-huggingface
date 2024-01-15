@@ -22,13 +22,13 @@ const gpt2 = inference.endpoint(
   "https://api-inference.huggingface.co/models/OpenAssistant/oasst-sft-4-pythia-12b-epoch-3.5"
 );
 
-app.get("/test", async (req, res) => {
+app.get("/api", async (req, res) => {
   res.send({
     message: "chat-hugingface",
   });
 });
 
-app.post("/test", async (req, res) => {
+app.post("/api", async (req, res) => {
   const question = req.body.question;
 
   const { generated_text } = await gpt2.textGeneration({
@@ -42,5 +42,5 @@ app.post("/test", async (req, res) => {
 });
 
 server.listen(PORT, () => {
-  console.log(`http://localhost:${PORT}/test`);
+  console.log(`http://localhost:${PORT}/api`);
 });
