@@ -18,8 +18,6 @@ const server = createServer(app);
 
 const io = new Server(server);
 
-const question = "The answer to the universe is";
-
 const gpt2 = inference.endpoint(
   "https://api-inference.huggingface.co/models/OpenAssistant/oasst-sft-4-pythia-12b-epoch-3.5"
 );
@@ -31,6 +29,8 @@ app.get("/test", async (req, res) => {
 });
 
 app.post("/test", async (req, res) => {
+  const question = req.body.question;
+
   const { generated_text } = await gpt2.textGeneration({
     inputs: question,
   });
